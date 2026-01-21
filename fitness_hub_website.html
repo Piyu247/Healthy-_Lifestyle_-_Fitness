@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Lifestyle & Fitness Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            color: #fff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        header h1 {
+            font-size: 3em;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #fff, #a8edea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)); }
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.1em;
+            color: #e0e0e0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: all 0.3s;
+            border-radius: 25px;
+            border: 2px solid transparent;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 25px;
+            padding: 30px;
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        aside {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        aside h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+            padding-bottom: 10px;
+        }
+
+        aside ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        aside li {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s;
+        }
+
+        aside li:hover {
+            transform: translateX(5px);
+        }
+
+        aside input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+            padding-bottom: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 1;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card h3 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .card p {
+            font-size: 0.95em;
+            line-height: 1.5;
+            color: #e8e8e8;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        .benefit-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-top: 10px;
+            font-weight: bold;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        footer p {
+            font-size: 1em;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                position: relative;
+                top: 0;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Healthy Lifestyle & Fitness Hub </h1>
+        <p>Transform Your Life Through Wellness & Fitness</p>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Workouts</a>
+        <a href="#">Nutrition</a>
+        <a href="#">Mindfulness</a>
+        <a href="#">Community</a>
+    </nav>
+
+    <main>
+        <aside>
+            <h3>Filters</h3>
+            <h4>Workout Type</h4>
+            <ul>
+                <li><input type="checkbox" id="cardio"> <label for="cardio">Cardio</label></li>
+                <li><input type="checkbox" id="strength"> <label for="strength">Strength</label></li>
+                <li><input type="checkbox" id="flexibility"> <label for="flexibility">Flexibility</label></li>
+                <li><input type="checkbox" id="mindfulness"> <label for="mindfulness">Mindfulness</label></li>
+            </ul>
+            
+            <h4>Diet Type</h4>
+            <ul>
+                <li><input type="checkbox" id="vegan"> <label for="vegan">Vegan</label></li>
+                <li><input type="checkbox" id="keto"> <label for="keto">Keto</label></li>
+                <li><input type="checkbox" id="balanced"> <label for="balanced">Balanced</label></li>
+                <li><input type="checkbox" id="protein"> <label for="protein">High Protein</label></li>
+            </ul>
+        </aside>
+
+        <section class="gallery">
+            <div class="card">
+                <img class="card-image" src="https://images.pexels.com/photos/317157/pexels-photo-317157.jpeg" alt="Yoga">
+                <div class="card-content">
+                    <h3>Yoga</h3>
+                    <p>Enhance flexibility, reduce stress, and improve mental clarity through ancient practices.</p>
+                    <span class="benefit-badge">Mind & Body Balance</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-image" src="https://res.cloudinary.com/peloton-cycle/image/fetch/f_auto,c_limit,w_3840,q_90/https://images.ctfassets.net/6ilvqec50fal/4nZl00rTNTPDyqLceLNcKC/0b3f3f44def6c9f01652f4dcf06f20a4/GettyImages-1398843569.jpg" alt="Running">
+                <div class="card-content">
+                    <h3>Running</h3>
+                    <p>Boost cardiovascular health, burn calories, and build endurance with every stride.</p>
+                    <span class="benefit-badge">Cardio Power</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-image" src="https://images.pexels.com/photos/3759657/pexels-photo-3759657.jpeg" alt="Meditation">
+                <div class="card-content">
+                    <h3>Meditation</h3>
+                    <p>Cultivate inner peace, focus, and emotional well-being through mindful breathing.</p>
+                    <span class="benefit-badge">Mental Wellness</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-image" src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg" alt="Gym">
+                <div class="card-content">
+                    <h3>Gym Training</h3>
+                    <p>Build strength, increase muscle mass, and sculpt your body with resistance training.</p>
+                    <span class="benefit-badge">Strength Building</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-image" src="https://hips.hearstapps.com/hmg-prod/images/view-of-a-mature-cyclist-climbing-the-col-du-royalty-free-image-1727119064.jpg?crop=0.667xw:1.00xh;0.0913xw,0&resize=1200:*" alt="Cycling">
+                <div class="card-content">
+                    <h3>Cycling</h3>
+                    <p>Low-impact cardio that strengthens legs, improves stamina, and connects you with nature.</p>
+                    <span class="benefit-badge">Endurance Boost</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-image" src="https://media.istockphoto.com/id/465383082/photo/female-swimmer-at-the-swimming-pool.jpg?s=612x612&w=0&k=20&c=tcTwN2rTvUBK4wddan_GUCxrXX6bBoU-hyrVMvmT0BM=" alt="Swimming">
+                <div class="card-content">
+                    <h3>Swimming</h3>
+                    <p>Full-body workout that's gentle on joints while building cardiovascular fitness.</p>
+                    <span class="benefit-badge">Total Body Workout</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-image" src="https://www.clistudios.com/wp-content/uploads/2021/06/Alyson-Stoner-the-first-step-Candids-10.10.20-2-scaled.jpg" alt="Dancing">
+                <div class="card-content">
+                    <h3>Dancing</h3>
+                    <p>Fun, expressive movement that burns calories while lifting your mood and energy.</p>
+                    <span class="benefit-badge">Joy & Fitness</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-image" src="https://www.thule.com/-/s/ul4rY4_Dbn38F7zrgB_f7YpgRa1FoLF6mIh4Gwdp-0g/rs:fit/h:918/w:1323/cb:-1/plain/-/jssmedia/images/thule/activities/hiking-and-trekking/general-item-4.jpg" alt="Hiking">
+                <div class="card-content">
+                    <h3>Hiking</h3>
+                    <p>Explore nature while building leg strength, endurance, and mental refreshment.</p>
+                    <span class="benefit-badge">Nature Connection</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-image" src="https://images.pexels.com/photos/4056723/pexels-photo-4056723.jpeg" alt="Pilates">
+                <div class="card-content">
+                    <h3>Pilates</h3>
+                    <p>Core-focused exercises that improve posture, flexibility, and muscle control.</p>
+                    <span class="benefit-badge">Core Strength</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Healthy Lifestyle & Fitness Hub — Piyush Patil, ITM Skill University </p>
+    </footer>
+
+</body>
+</html>
